@@ -4,6 +4,8 @@ import { locationOptions } from "../../assets/locations";
 import Button from "../../components/button/Button";
 import SelectInput from "../../components/selectInput/SelectInput";
 import "./appointmentDetails.css";
+import { useContext } from "react";
+import { formStateContext } from "../../context/formStateContext";
 
 const appointmentTypes = [
   { value: "dermatology", label: "Dermatology" },
@@ -13,6 +15,7 @@ const appointmentTypes = [
 
 const AppointmentDetails = () => {
   const navigate = useNavigate();
+  const { inputs, setInputs } = useContext(formStateContext);
 
   return (
     <section>
@@ -31,7 +34,17 @@ const AppointmentDetails = () => {
         />
         <div className="describe-issues__container">
           <label className="input-label">Describe Your Issues</label>
-          <textarea className="input-textarea" id="describeIssues"></textarea>
+          <textarea
+            className="input-textarea"
+            id="describeIssues"
+            onChange={(e) =>
+              setInputs((prev) => ({
+                ...prev,
+                ["describeIssues"]: e.target.value,
+              }))
+            }
+            value={inputs["describeIssues"]}
+          ></textarea>
         </div>
         <div className="progress-buttons__container">
           <Button handleClick={() => navigate("/contact-details")}>Next</Button>

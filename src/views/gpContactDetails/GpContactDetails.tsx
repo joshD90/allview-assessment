@@ -4,9 +4,20 @@ import Button from "../../components/button/Button";
 import SimpleInput from "../../components/simpleInput/SimpleInput";
 
 import "./gpContactDetails.css";
+import { useContext } from "react";
+import { formStateContext } from "../../context/formStateContext";
 
 const GpContactDetails = () => {
+  const { inputs, setInputs } = useContext(formStateContext);
   const navigate = useNavigate();
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+    key: string
+  ) => {
+    setInputs((prev) => ({ ...prev, [key]: e.target.value }));
+  };
+
   return (
     <section>
       <h1>GP Contact Details</h1>
@@ -21,7 +32,12 @@ const GpContactDetails = () => {
         </div>
         <div>
           <h3 className="input-label">GP Clinic Address</h3>
-          <textarea id="gpClinicAddress" className="input-textarea"></textarea>
+          <textarea
+            id="gpClinicAddress"
+            className="input-textarea"
+            onChange={(e) => handleInputChange(e, "gpClinicAddress")}
+            value={inputs["gpClinicAddress"]}
+          ></textarea>
         </div>
         <div>
           <h1>Medical Insurance Details</h1>
@@ -29,15 +45,33 @@ const GpContactDetails = () => {
           <div className="medical-insurer__container">
             <h3 className="input-label">Medical Insurer</h3>
             <label>
-              <input type="radio" name="option" value="vhi" checked />
+              <input
+                type="radio"
+                name="option"
+                value="vhi"
+                checked={"vhi" === inputs["medicalInsurer"]}
+                onChange={(e) => handleInputChange(e, "medicalInsurer")}
+              />
               VHI
             </label>
             <label>
-              <input type="radio" name="option" value="irishLife" />
+              <input
+                type="radio"
+                name="option"
+                value="irishLife"
+                checked={"irishLife" === inputs["medicalInsurer"]}
+                onChange={(e) => handleInputChange(e, "medicalInsurer")}
+              />
               Irish Life
             </label>
             <label>
-              <input type="radio" name="option" value="layaHealth" />
+              <input
+                type="radio"
+                name="option"
+                value="layaHealth"
+                checked={"layaHealth" === inputs["medicalInsurer"]}
+                onChange={(e) => handleInputChange(e, "medicalInsurer")}
+              />
               Laya Healthcare
             </label>
           </div>

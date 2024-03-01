@@ -44,7 +44,7 @@ const PatientConsentDetails = () => {
           <Button handleClick={() => navigate("/gp-contact")} secondary>
             Previous
           </Button>
-          <Button handleClick={() => null}>Submit</Button>
+          <Button handleClick={() => navigate("/result")}>Submit</Button>
         </div>
       </form>
     </section>
