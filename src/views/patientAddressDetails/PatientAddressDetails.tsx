@@ -6,26 +6,40 @@ import SelectInput from "../../components/selectInput/SelectInput";
 import SimpleInput from "../../components/simpleInput/SimpleInput";
 
 import "./patientAddressDetails.css";
+import { useValidateForm } from "../../hooks/useValidateForm";
+import { patientAddressSchema } from "../../validationSchemas/patientDetailsSchema";
 
 const PatientAddressDetails = () => {
   const navigate = useNavigate();
+  const { validateForm } = useValidateForm();
+
+  const handleNext = async () => {
+    const validationResult = await validateForm(patientAddressSchema);
+    if (!validationResult) return;
+
+    navigate("/contact-details");
+  };
   return (
     <section>
       <h1>Patient Address</h1>
       <hr />
       <form>
         <h3 className="input-label">Address</h3>
-        <SimpleInput
-          label="Street Address"
-          id="patientStreetAddress"
-          type="text"
-        ></SimpleInput>
-        <SimpleInput
-          label="Address Line 2"
-          id="patientAddressLine2"
-          type="text"
-        ></SimpleInput>
-        <div className="double-simple-input">
+        <div className="mt1">
+          <SimpleInput
+            label="Street Address"
+            id="patientStreetAddress"
+            type="text"
+          ></SimpleInput>
+        </div>
+        <div className="mt1">
+          <SimpleInput
+            label="Address Line 2"
+            id="patientAddressLine2"
+            type="text"
+          ></SimpleInput>
+        </div>
+        <div className="double-simple-input mt1">
           <SimpleInput label="City" id="patientAddressCity" type="text" />
           <SimpleInput label="County" id="patientAddressCounty" type="text" />
         </div>
@@ -44,7 +58,7 @@ const PatientAddressDetails = () => {
           <Button handleClick={() => navigate("/contact-details")} secondary>
             Previous
           </Button>
-          <Button handleClick={() => navigate("/gp-contact")}>Next</Button>
+          <Button handleClick={handleNext}>Next</Button>
         </div>
       </form>
     </section>

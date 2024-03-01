@@ -6,10 +6,21 @@ import SimpleInput from "../../components/simpleInput/SimpleInput";
 import "./gpContactDetails.css";
 import { useContext } from "react";
 import { formStateContext } from "../../context/formStateContext";
+import { useValidateForm } from "../../hooks/useValidateForm";
+import { gpContactSchema } from "../../validationSchemas/patientDetailsSchema";
+import ErrorMessage from "../../components/errorMessage/ErrorMessage";
 
 const GpContactDetails = () => {
   const { inputs, setInputs } = useContext(formStateContext);
   const navigate = useNavigate();
+  const { validateForm } = useValidateForm();
+
+  const handleNext = async () => {
+    const validationResult = await validateForm(gpContactSchema);
+    if (!validationResult) return;
+
+    navigate("/consent");
+  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
@@ -36,8 +47,13 @@ const GpContactDetails = () => {
             id="gpClinicAddress"
             className="input-textarea"
             onChange={(e) => handleInputChange(e, "gpClinicAddress")}
-            value={inputs["gpClinicAddress"]}
+            value={
+              typeof inputs["gpClinicAddress"] === "string"
+                ? inputs["gpClinicAddress"]
+                : ""
+            }
           ></textarea>
+          <ErrorMessage id="gpClinicAddress" />
         </div>
         <div>
           <h1>Medical Insurance Details</h1>
@@ -74,6 +90,7 @@ const GpContactDetails = () => {
               />
               Laya Healthcare
             </label>
+            <ErrorMessage id="medicalInsurer" />
           </div>
           <div>
             {/* TODO: Make this dynamic */}
@@ -85,7 +102,7 @@ const GpContactDetails = () => {
           <Button handleClick={() => navigate("/address-details")} secondary>
             Previous
           </Button>
-          <Button handleClick={() => navigate("/consent")}>Next</Button>
+          <Button handleClick={handleNext}>Next</Button>
         </div>
       </form>
     </section>

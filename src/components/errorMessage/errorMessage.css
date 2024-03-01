@@ -1,0 +1,7 @@
+.form-errors {
+  color: var(--errorColor);
+}
+
+.form-errors p {
+  margin: 0;
+}

@@ -5,7 +5,7 @@ export type IterableStringType = {
 };
 
 export type IterableType = {
-  [key: string]: string | number;
+  [key: string]: string | number | boolean;
 };
 
 export type FormContext = {
