@@ -1,0 +1,30 @@
+.react-datepicker {
+  width: 100% !important;
+}
+
+.react-datepicker__input-container {
+  width: 100% !important;
+}
+
+.react-datepicker__input-container > input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: var(--inputText);
+  outline: none;
+  opacity: 1;
+}
+
+.react-datepicker__input-container > input:focus {
+  outline: none;
+}
+
+.react-datepicker__navigation--previous {
+  left: -2rem; /* Adjust as needed */
+}
+
+.react-datepicker__navigation--next {
+  left: 8rem; /* Adjust as needed */
+}

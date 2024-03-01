@@ -1,15 +1,17 @@
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 import Button from "../../components/button/Button";
 import SimpleInput from "../../components/simpleInput/SimpleInput";
+import ErrorMessage from "../../components/errorMessage/ErrorMessage";
+import DatePickerContainer from "../../components/datePicker/DatePickerContainer";
 
-import "./patientContactDetails.css";
-import { useContext } from "react";
+import { formErrorContext } from "../../context/formErrorsContext";
 import { formStateContext } from "../../context/formStateContext";
 import { useValidateForm } from "../../hooks/useValidateForm";
 import { patientDetailsSchema } from "../../validationSchemas/patientDetailsSchema";
-import ErrorMessage from "../../components/errorMessage/ErrorMessage";
-import { formErrorContext } from "../../context/formErrorsContext";
+
+import "./patientContactDetails.css";
 
 const PatientContactDetails = () => {
   const { inputs, setInputs } = useContext(formStateContext);
@@ -17,22 +19,6 @@ const PatientContactDetails = () => {
   const { setErrors } = useContext(formErrorContext);
 
   const navigate = useNavigate();
-
-  const handleDOBChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    key: string
-  ) => {
-    const value = parseInt(e.target.value);
-    const currentYear = new Date(Date.now()).getFullYear();
-
-    if (isNaN(value)) return;
-    if (value < 0 || value > currentYear) return;
-    if (key === "dobDay" && value > 31) return;
-    if (key === "dobMonth" && value > 12) return;
-
-    setInputs((prev) => ({ ...prev, [key]: value }));
-    setErrors((prev) => ({ ...prev, ["dob"]: "" }));
-  };
 
   const handle16Change = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -76,40 +62,9 @@ const PatientContactDetails = () => {
           <SimpleInput label="Phone" id="patientPhone" type="text" />
         </div>
         <div className="age__container">
-          <div>
-            <h3 className="input-label">Date of Birth</h3>
-            <div className="dob__container">
-              <input
-                type="number"
-                placeholder="DD"
-                className="number-input"
-                onChange={(e) => handleDOBChange(e, "dobDay")}
-                value={
-                  typeof inputs["dobDay"] === "number" ? inputs["dobDay"] : ""
-                }
-              />
-              <input
-                type="number"
-                placeholder="MM"
-                className="number-input"
-                onChange={(e) => handleDOBChange(e, "dobMonth")}
-                value={
-                  typeof inputs["dobMonth"] === "number"
-                    ? inputs["dobMonth"]
-                    : ""
-                }
-              />
-              <input
-                type="number"
-                placeholder="YYYY"
-                className="number-input"
-                onChange={(e) => handleDOBChange(e, "dobYear")}
-                value={
-                  typeof inputs["dobYear"] === "number" ? inputs["dobYear"] : ""
-                }
-              />
-            </div>
-            <ErrorMessage id="dob" />
+          <div className="age-select__container">
+            <h3 className="input-label">Select Date of Birth</h3>
+            <DatePickerContainer />
           </div>
           <div className="age-confirm__container">
             <h3 className="input-label">Over 18 Years Old?</h3>
