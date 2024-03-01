@@ -22,9 +22,7 @@ const FileInput = () => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept,
     onDrop: (acceptedFiles) => {
-      setFiles((prev) => {
-        return [...prev, ...acceptedFiles];
-      });
+      setFiles(acceptedFiles);
     },
   });
 
@@ -34,7 +32,7 @@ const FileInput = () => {
       className="drag-drop__container"
       style={{
         backgroundColor: isDragActive
-          ? "var(--lightblue)"
+          ? "var(--mutedblue)"
           : "var(--background)",
       }}
     >
