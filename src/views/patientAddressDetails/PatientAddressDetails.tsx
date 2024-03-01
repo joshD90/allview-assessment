@@ -8,6 +8,7 @@ import SimpleInput from "../../components/simpleInput/SimpleInput";
 import "./patientAddressDetails.css";
 import { useValidateForm } from "../../hooks/useValidateForm";
 import { patientAddressSchema } from "../../validationSchemas/patientDetailsSchema";
+import FileInput from "../../components/fileInput/FileInput";
 
 const PatientAddressDetails = () => {
   const navigate = useNavigate();
@@ -54,7 +55,9 @@ const PatientAddressDetails = () => {
             <label htmlFor="">Country</label>
           </div>
         </div>
-        <div className="progress-buttons__container">
+        <h3 className="input-label">Upload Proof of Address</h3>
+        <FileInput />
+        <div className="progress-buttons__container mt2">
           <Button handleClick={() => navigate("/contact-details")} secondary>
             Previous
           </Button>

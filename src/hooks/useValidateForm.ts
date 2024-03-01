@@ -16,7 +16,6 @@ export const useValidateForm = () => {
       });
       return validationResult;
     } catch (error) {
-      console.log(error);
       setErrors((prev) => {
         if (error instanceof ValidationError) {
           const errorCollection: IterableStringType = {};
@@ -32,7 +31,6 @@ export const useValidateForm = () => {
             }
             if (err.path.toLowerCase().includes("consent"))
               errPath = "consentChecks";
-            console.log(errPath, "err path");
 
             errorCollection[errPath] = errMsg;
           });

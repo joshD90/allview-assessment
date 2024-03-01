@@ -11,6 +11,7 @@ import PatientConsentDetails from "./views/patientConsentDetails/PatientConsentD
 import { FormStateContextProvider } from "./context/formStateContext";
 import { FormErrorContextProvider } from "./context/formErrorsContext";
 import InfoOut from "./views/infoOut/InfoOut";
+import { FileContextProvider } from "./context/fileContext";
 
 const App = () => {
   return (
@@ -18,25 +19,27 @@ const App = () => {
       <BrowserRouter>
         <FormStateContextProvider>
           <FormErrorContextProvider>
-            <Routes>
-              <Route path="/" element={<FormContainer />}>
-                <Route
-                  path="appointment-details"
-                  element={<AppointmentDetails />}
-                />
-                <Route
-                  path="contact-details"
-                  element={<PatientContactDetails />}
-                />
-                <Route path="gp-contact" element={<GpContactDetails />} />
-                <Route
-                  path="address-details"
-                  element={<PatientAddressDetails />}
-                />
-                <Route path="consent" element={<PatientConsentDetails />} />
-              </Route>
-              <Route path="result" element={<InfoOut />} />
-            </Routes>
+            <FileContextProvider>
+              <Routes>
+                <Route path="/" element={<FormContainer />}>
+                  <Route
+                    path="appointment-details"
+                    element={<AppointmentDetails />}
+                  />
+                  <Route
+                    path="contact-details"
+                    element={<PatientContactDetails />}
+                  />
+                  <Route path="gp-contact" element={<GpContactDetails />} />
+                  <Route
+                    path="address-details"
+                    element={<PatientAddressDetails />}
+                  />
+                  <Route path="consent" element={<PatientConsentDetails />} />
+                </Route>
+                <Route path="result" element={<InfoOut />} />
+              </Routes>
+            </FileContextProvider>
           </FormErrorContextProvider>
         </FormStateContextProvider>
       </BrowserRouter>
