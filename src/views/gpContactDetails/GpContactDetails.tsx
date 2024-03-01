@@ -43,7 +43,7 @@ const GpContactDetails = () => {
           </div>
           <div>
             {/* TODO: Make this dynamic */}
-            <h3>Policy Number</h3>
+            <h3 className="input-label">Policy Number</h3>
             <SimpleInput id="insurancePolicyNum" label="" type="text" />
           </div>
         </div>

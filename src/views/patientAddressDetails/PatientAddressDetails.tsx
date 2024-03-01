@@ -37,6 +37,7 @@ const PatientAddressDetails = () => {
               label=""
               id="patientAddressCountry"
             />
+            <label htmlFor="">Country</label>
           </div>
         </div>
         <div className="progress-buttons__container">

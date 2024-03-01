@@ -29,11 +29,9 @@ const AppointmentDetails = () => {
           id="appointmenLocation"
           label="Appointment Location"
         />
-        <div className="input-textarea">
-          <label htmlFor="" className="input-label">
-            Describe Your Issues
-          </label>
-          <textarea></textarea>
+        <div className="describe-issues__container">
+          <label className="input-label">Describe Your Issues</label>
+          <textarea className="input-textarea" id="describeIssues"></textarea>
         </div>
         <div className="progress-buttons__container">
           <Button handleClick={() => navigate("/contact-details")}>Next</Button>

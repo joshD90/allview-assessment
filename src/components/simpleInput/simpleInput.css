@@ -4,12 +4,13 @@
 }
 
 .simple-input__container label {
-  color: var(--inputText);
+  color: var(--darkTextColor);
 }
 
 .simple-input__container input {
-  padding: 0.3rem;
+  padding: 0.4rem;
   font-size: 1.2rem;
+  color: var(--inputText);
 }
 
 .simple-input__container input:focus {

@@ -7,20 +7,27 @@
   max-width: 640px;
 }
 
+h1 {
+  color: var(--darkblue);
+  font-size: x-large;
+}
+hr {
+  border: none;
+  height: 1px;
+  background-color: var(--hrColor);
+}
+
 .input-label {
   color: var(--darkblue);
   font-size: 1rem;
   font-weight: 700;
+  margin-top: 1.5rem;
 }
 
 .double-simple-input {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
-}
-.input-textarea:focus {
-  outline: none;
-  border-color: var(--inputText);
 }
 
 .input-textarea {
@@ -29,6 +36,12 @@
   color: var(--inputText);
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
+  min-height: 10rem;
+}
+
+.input-textarea:focus {
+  outline: none;
+  border-color: var(--inputText);
 }
 
 .progress-buttons__container {
@@ -36,6 +49,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  margin-top: 2rem;
 }
 
 @media screen and (min-width: 680px) {
