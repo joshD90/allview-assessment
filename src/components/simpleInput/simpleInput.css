@@ -1,0 +1,17 @@
+.simple-input__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.simple-input__container label {
+  color: var(--inputText);
+}
+
+.simple-input__container input {
+  padding: 0.3rem;
+  font-size: 1.2rem;
+}
+
+.simple-input__container input:focus {
+  outline: none;
+}

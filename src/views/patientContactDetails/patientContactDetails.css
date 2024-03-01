@@ -1,0 +1,44 @@
+.age__container {
+  display: flex;
+  gap: 1rem;
+}
+
+.dob__container {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.3rem;
+}
+
+.number-input {
+  font-size: 1rem;
+  padding: 0.5rem 0.3rem;
+  width: 3rem;
+  color: var(--inputText);
+  text-align: center;
+}
+
+.number-input:focus {
+  outline: none;
+}
+
+/* For Chrome, Safari, Edge, Opera */
+.number-input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+.number-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.age-confirm__container div div {
+  display: flex;
+  align-items: center;
+  color: var(--inputText);
+}
+.age-confirm__container label {
+  font-size: 0.7rem;
+}

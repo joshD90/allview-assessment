@@ -1,0 +1,6 @@
+.medical-insurer__container {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  color: var(--inputText);
+}

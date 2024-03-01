@@ -1,0 +1,13 @@
+.agreements-inputs__container {
+  display: flex;
+  flex-direction: column;
+  color: var(--inputText);
+}
+
+.agreements-inputs__container input {
+  margin-right: 1rem;
+}
+
+.consent-explainer {
+  color: var(--darkTextColor);
+}

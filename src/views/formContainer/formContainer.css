@@ -1,4 +1,45 @@
 .form-container {
   background-color: var(--background);
   padding: 2rem;
+  box-shadow: var(--shadow-xl);
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 640px;
+}
+
+.input-label {
+  color: var(--darkblue);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.double-simple-input {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.input-textarea:focus {
+  outline: none;
+  border-color: var(--inputText);
+}
+
+.input-textarea {
+  width: 100%;
+  resize: vertical;
+  color: var(--inputText);
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+}
+
+.progress-buttons__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 680px) {
+  .form-container {
+    width: 90%;
+  }
 }

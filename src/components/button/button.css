@@ -1,0 +1,19 @@
+button {
+  color: var(--background);
+  border-radius: 1.5rem;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border: none;
+  min-width: 10rem;
+  cursor: pointer;
+}
+button:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.primary {
+  background-color: var(--darkblue);
+}
+.secondary {
+  background-color: var(--lightblue);
+}
