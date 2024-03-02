@@ -1,24 +1,27 @@
 import { useNavigate } from "react-router-dom";
 
+import { useNavFreedom } from "../../hooks/useNavFreedom";
+import { useValidateForm } from "../../hooks/useValidateForm";
+
 import { countryOptions } from "../../assets/countries";
 import Button from "../../components/button/Button";
 import SelectInput from "../../components/selectInput/SelectInput";
 import SimpleInput from "../../components/simpleInput/SimpleInput";
-
-import "./patientAddressDetails.css";
-import { useValidateForm } from "../../hooks/useValidateForm";
 import { patientAddressSchema } from "../../validationSchemas/patientDetailsSchema";
 import FileInput from "../../components/fileInput/FileInput";
+
+import "./patientAddressDetails.css";
 
 const PatientAddressDetails = () => {
   const navigate = useNavigate();
   const { validateForm } = useValidateForm();
+  const navQuery = useNavFreedom();
 
   const handleNext = async () => {
     const validationResult = await validateForm(patientAddressSchema);
-    if (!validationResult) return;
+    if (!validationResult && !navQuery) return;
 
-    navigate("/contact-details");
+    navigate("/gp-contact" + navQuery);
   };
   return (
     <section>
@@ -58,7 +61,10 @@ const PatientAddressDetails = () => {
         <h3 className="input-label">Upload Proof of Address</h3>
         <FileInput />
         <div className="progress-buttons__container mt2">
-          <Button handleClick={() => navigate("/contact-details")} secondary>
+          <Button
+            handleClick={() => navigate("/contact-details" + navQuery)}
+            secondary
+          >
             Previous
           </Button>
           <Button handleClick={handleNext}>Next</Button>

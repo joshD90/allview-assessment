@@ -5,15 +5,15 @@ export const useDetermineStep = (): number => {
 
   switch (location.pathname) {
     case "/appointment-details":
-      return 0;
-    case "/contact-details":
       return 1;
-    case "/address-details":
+    case "/contact-details":
       return 2;
-    case "/gp-contact":
+    case "/address-details":
       return 3;
-    case "/consent":
+    case "/gp-contact":
       return 4;
+    case "/consent":
+      return 5;
 
     default:
       return 0;

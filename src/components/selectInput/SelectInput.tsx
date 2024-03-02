@@ -29,6 +29,7 @@ const SelectInput: FC<Props> = ({ label, id, options }) => {
           {label}
         </label>
       )}
+      {/* Container is overall container. Spread the associated basestyles and adjust the ones needed changing */}
       <Select
         options={options}
         styles={{
@@ -36,11 +37,13 @@ const SelectInput: FC<Props> = ({ label, id, options }) => {
             ...baseStyles,
             width: "100%",
           }),
-
+          // Control styles works with the bottom input
           control: (baseStyles, state) => ({
             ...baseStyles,
             width: "100%",
             boxShadow: state.isFocused ? "none" : "none",
+            borderColor: "var(--textDark)",
+            "&:hover": { borderColor: "var(--textDark)" },
           }),
         }}
         onChange={(e) => handleChange(e)}

@@ -1,3 +1,9 @@
+.progress__stepNum {
+  color: var(--inputText);
+  font-size: smaller;
+  margin: 0;
+}
+
 .progress__container {
   height: 1rem;
   background-color: var(--mutedblue);

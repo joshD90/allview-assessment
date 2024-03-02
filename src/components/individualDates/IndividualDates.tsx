@@ -4,6 +4,7 @@ import { formStateContext } from "../../context/formStateContext";
 import { formErrorContext } from "../../context/formErrorsContext";
 
 import "./individualDates.css";
+//currently not in use.  This adheres to the design of the 3 seperate boxes.  This can be dropped back into PatientContactDetails.tsx instead of the DatePickerContainer and h3 associated with.  Please update Validation schema associated with if doing so.
 
 const IndividualDates = () => {
   const { inputs, setInputs } = useContext(formStateContext);
@@ -15,7 +16,7 @@ const IndividualDates = () => {
   ) => {
     const value = parseInt(e.target.value);
     const currentYear = new Date(Date.now()).getFullYear();
-
+    //some rough validation checking
     if (isNaN(value)) return;
     if (value < 0 || value > currentYear) return;
     if (key === "dobDay" && value > 31) return;

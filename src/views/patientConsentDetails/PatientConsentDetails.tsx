@@ -1,18 +1,24 @@
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+
+import { useSubmitForm } from "../../hooks/useSubmitForm";
+import { useNavFreedom } from "../../hooks/useNavFreedom";
+import { formStateContext } from "../../context/formStateContext";
+import { useValidateForm } from "../../hooks/useValidateForm";
+import { formErrorContext } from "../../context/formErrorsContext";
 
 import Button from "../../components/button/Button";
-import "./patientConsentDetails.css";
-import { useContext } from "react";
-import { formStateContext } from "../../context/formStateContext";
 import ErrorMessage from "../../components/errorMessage/ErrorMessage";
-import { useValidateForm } from "../../hooks/useValidateForm";
 import { consentSchema } from "../../validationSchemas/patientDetailsSchema";
-import { formErrorContext } from "../../context/formErrorsContext";
+
+import "./patientConsentDetails.css";
 
 const PatientConsentDetails = () => {
   const navigate = useNavigate();
   const { inputs, setInputs } = useContext(formStateContext);
   const { setErrors } = useContext(formErrorContext);
+  const { handlePostFetch } = useSubmitForm();
+  const navQuery = useNavFreedom();
 
   const { validateForm } = useValidateForm();
 
@@ -26,13 +32,16 @@ const PatientConsentDetails = () => {
 
   const handleSubmit = async () => {
     const validateResult = await validateForm(consentSchema);
-    if (!validateResult) return;
+    if (!validateResult && !navQuery) return;
+    await handlePostFetch();
     navigate("/result");
   };
 
   return (
     <section>
-      <h1>Consent</h1>
+      <h1>
+        Consent <span className="required-tag">Required</span>
+      </h1>
       <hr />
       <form action="">
         <div className="agreements-inputs__container">
@@ -67,21 +76,25 @@ const PatientConsentDetails = () => {
             />
             By submitting this form, you are agreeing to our Privacy Policy
           </label>
-          {/* TODO: Update this with dynamic insurer */}
-          <label htmlFor="insuranceConsentToShare">
-            <input
-              type="checkbox"
-              id="insuranceConsentToShare"
-              name="insuranceConsentToShare"
-              onChange={(e) => handleInputChange(e, "insuranceConsentToShare")}
-              checked={
-                typeof inputs["insuranceConsentToShare"] === "boolean"
-                  ? inputs["insuranceConsentToShare"]
-                  : false
-              }
-            />
-            Consent to sharing your data with Vhi Healthcare
-          </label>
+
+          {inputs["medicalInsurer"] === "vhi" && (
+            <label htmlFor="insuranceConsentToShare">
+              <input
+                type="checkbox"
+                id="insuranceConsentToShare"
+                name="insuranceConsentToShare"
+                onChange={(e) =>
+                  handleInputChange(e, "insuranceConsentToShare")
+                }
+                checked={
+                  typeof inputs["insuranceConsentToShare"] === "boolean"
+                    ? inputs["insuranceConsentToShare"]
+                    : false
+                }
+              />
+              Consent to sharing your data with Vhi Healthcare
+            </label>
+          )}
           <ErrorMessage id="consentChecks" />
         </div>
         <p className="consent-explainer">
@@ -92,7 +105,10 @@ const PatientConsentDetails = () => {
           continuity and quality of your care.
         </p>
         <div className="progress-buttons__container">
-          <Button handleClick={() => navigate("/gp-contact")} secondary>
+          <Button
+            handleClick={() => navigate("/gp-contact" + navQuery)}
+            secondary
+          >
             Previous
           </Button>
           <Button handleClick={handleSubmit}>Submit</Button>

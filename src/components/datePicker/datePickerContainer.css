@@ -16,7 +16,7 @@
 .react-datepicker__input-container > input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--darkTextColor);
   border-radius: 4px;
   font-size: 16px;
   color: var(--inputText);

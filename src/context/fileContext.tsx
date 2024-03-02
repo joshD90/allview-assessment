@@ -5,7 +5,7 @@ export const fileContext = createContext<{
   setFiles: React.Dispatch<SetStateAction<File[]>>;
 }>({
   files: [],
-  setFiles: () => null,
+  setFiles: () => null, //set to a blank function as cant use state until inside FC
 });
 
 type Props = { children: ReactNode };

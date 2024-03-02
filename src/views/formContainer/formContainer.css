@@ -8,6 +8,13 @@
   max-width: 640px;
 }
 
+.general-error__container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
 h1 {
   color: var(--darkblue);
   font-size: x-large;
@@ -23,6 +30,7 @@ hr {
   font-size: 1rem;
   font-weight: 700;
   margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .double-simple-input {
@@ -62,6 +70,13 @@ hr {
 }
 .mt2 {
   margin-top: 2rem;
+}
+
+.required-tag {
+  font-weight: normal;
+  color: var(--errorColor);
+  font-style: italic;
+  font-size: 0.8rem;
 }
 
 @media screen and (min-width: 680px) {

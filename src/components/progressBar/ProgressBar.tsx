@@ -10,13 +10,17 @@ const ProgressBar: FC<Props> = ({ percentComplete }) => {
   const definitePercent = percentComplete ?? currentStep * 20;
 
   return (
-    <div className="progress__container">
-      <div className="progress__bar" style={{ width: `${definitePercent}%` }}>
-        <span
-          className={`${definitePercent === 0 ? "progress__push-right" : ""}`}
-        >
-          {definitePercent}%
-        </span>
+    <div>
+      <p className="progress__stepNum">Step {currentStep}/5</p>
+      <div className="progress__container">
+        <div className="progress__bar" style={{ width: `${definitePercent}%` }}>
+          {/* progress__push-right class was necessary when step started at 0.  It does not negatively impact and can be reverted easily*/}
+          <span
+            className={`${definitePercent === 0 ? "progress__push-right" : ""}`}
+          >
+            {definitePercent}%
+          </span>
+        </div>
       </div>
     </div>
   );

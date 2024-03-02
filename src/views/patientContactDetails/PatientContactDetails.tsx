@@ -12,11 +12,13 @@ import { useValidateForm } from "../../hooks/useValidateForm";
 import { patientDetailsSchema } from "../../validationSchemas/patientDetailsSchema";
 
 import "./patientContactDetails.css";
+import { useNavFreedom } from "../../hooks/useNavFreedom";
 
 const PatientContactDetails = () => {
   const { inputs, setInputs } = useContext(formStateContext);
   const { validateForm } = useValidateForm();
   const { setErrors } = useContext(formErrorContext);
+  const navQuery = useNavFreedom();
 
   const navigate = useNavigate();
 
@@ -29,11 +31,19 @@ const PatientContactDetails = () => {
     setErrors((prev) => ({ ...prev, ["over16"]: "" }));
   };
 
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    key: string
+  ) => {
+    setInputs((prev) => ({ ...prev, [key]: e.target.value }));
+    setErrors((prev) => ({ ...prev, [key]: "" }));
+  };
+
   const handleNext = async () => {
     const validationResult = await validateForm(patientDetailsSchema);
-    if (!validationResult) return;
+    if (!validationResult && !navQuery) return;
 
-    navigate("/address-details");
+    navigate("/address-details" + navQuery);
   };
 
   return (
@@ -41,14 +51,16 @@ const PatientContactDetails = () => {
       <h1>Patient Contact Details</h1>
       <hr />
 
-      {/* TODO: fix styling and margins on h3 */}
       <form action="">
         <h3 className="input-label">Name</h3>
         <div className="double-simple-input">
           <SimpleInput type="text" label="First" id="patientFName" />
           <SimpleInput type="text" label="Last" id="patientLName" />
         </div>
-        <h3 className="input-label">Email</h3>
+        <h3 className="input-label">
+          Email <span className="required-tag">Required</span>
+        </h3>
+
         <div className="double-simple-input">
           <SimpleInput type="email" label="Email" id="patientEmail" />
           <SimpleInput
@@ -68,7 +80,9 @@ const PatientContactDetails = () => {
             <ErrorMessage id="dob" />
           </div>
           <div className="age-confirm__container">
-            <h3 className="input-label">Over 18 Years Old?</h3>
+            <h3 className="input-label">
+              Over 18 Years Old? <span className="required-tag">Required</span>
+            </h3>
             <div className="age-confirm__container">
               <div>
                 <input
@@ -94,9 +108,47 @@ const PatientContactDetails = () => {
             <ErrorMessage id="over16" />
           </div>
         </div>
+        {inputs["over16"] === false && (
+          <div className="medical-insurer__container">
+            <h3 className="input-label">Your Relationship With The Patient</h3>
+            <label>
+              <input
+                type="radio"
+                name="option"
+                value="parent"
+                checked={"parent" === inputs["relationshipStatus"]}
+                onChange={(e) => handleInputChange(e, "relationshipStatus")}
+              />
+              Parent
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="option"
+                value="guardian"
+                checked={"guardian" === inputs["relationshipStatus"]}
+                onChange={(e) => handleInputChange(e, "relationshipStatus")}
+              />
+              Guardian
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="option"
+                value="other"
+                checked={"other" === inputs["relationshipStatus"]}
+                onChange={(e) => handleInputChange(e, "relationshipStatus")}
+              />
+              Other
+            </label>
+
+            <ErrorMessage id="relationshipStatus" />
+          </div>
+        )}
+
         <div className="progress-buttons__container">
           <Button
-            handleClick={() => navigate("/appointment-details")}
+            handleClick={() => navigate("/appointment-details" + navQuery)}
             secondary
           >
             Previous

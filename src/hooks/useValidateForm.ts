@@ -17,6 +17,7 @@ export const useValidateForm = () => {
       return validationResult;
     } catch (error) {
       setErrors((prev) => {
+        //most of the heavy lifting is done in the catch block.  Errors are given back as ValidationError[]
         if (error instanceof ValidationError) {
           const errorCollection: IterableStringType = {};
 

@@ -1,21 +1,25 @@
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+
+import { formStateContext } from "../../context/formStateContext";
+import { formErrorContext } from "../../context/formErrorsContext";
+import { useNavFreedom } from "../../hooks/useNavFreedom";
+import { useValidateForm } from "../../hooks/useValidateForm";
 
 import { locationOptions } from "../../assets/locations";
 import Button from "../../components/button/Button";
-import SelectInput from "../../components/selectInput/SelectInput";
-import "./appointmentDetails.css";
-import { useContext } from "react";
-import { formStateContext } from "../../context/formStateContext";
 import { appointmentTypes } from "../../assets/appointmentTypes";
-import { useValidateForm } from "../../hooks/useValidateForm";
 import { appointmentDetailSchema } from "../../validationSchemas/patientDetailsSchema";
-import { formErrorContext } from "../../context/formErrorsContext";
 import ErrorMessage from "../../components/errorMessage/ErrorMessage";
+import SelectInput from "../../components/selectInput/SelectInput";
+
+import "./appointmentDetails.css";
 
 const AppointmentDetails = () => {
   const navigate = useNavigate();
   const { inputs, setInputs } = useContext(formStateContext);
   const { setErrors } = useContext(formErrorContext);
+  const navQuery = useNavFreedom();
 
   const { validateForm } = useValidateForm();
 
@@ -29,9 +33,9 @@ const AppointmentDetails = () => {
 
   const handleNext = async () => {
     const validationResult = await validateForm(appointmentDetailSchema);
-    if (!validationResult) return;
+    if (!validationResult && !navQuery) return;
 
-    navigate("/contact-details");
+    navigate(`/contact-details${navQuery}`);
   };
 
   return (

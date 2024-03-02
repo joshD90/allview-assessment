@@ -8,7 +8,7 @@ type Props = { id: string };
 const ErrorMessage: FC<Props> = ({ id }) => {
   const { errors } = useContext(formErrorContext);
 
-  // if (!errors[id] || errors[id] === "") return null;
+  if (!errors[id] || errors[id] === "") return null;
 
   return (
     <div className="form-errors">

@@ -10,4 +10,5 @@
 
 .consent-explainer {
   color: var(--darkTextColor);
+  margin-top: 2.5rem;
 }
