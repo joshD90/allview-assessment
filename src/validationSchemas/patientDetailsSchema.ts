@@ -29,7 +29,10 @@ export const patientDetailsSchema = yup.object({
   //   .string()
   //   .required("Please enter a phone number")
   //   .matches(phoneRegExp, "Only + ( ) and numbers allowed"),
-  // dob: yup.date().required("Please enter patient's date of birth"),
+  // dob: yup
+  //   .date()
+  //   .required("Please enter patient's date of birth")
+  //   .max(new Date(), "Date must be in the past"),
   over16: yup.boolean().required("Please select one"),
 });
 
