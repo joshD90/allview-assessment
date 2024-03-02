@@ -1,6 +1,7 @@
 .simple-input__container {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .simple-input__container label {

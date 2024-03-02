@@ -23,16 +23,11 @@ export const useValidateForm = () => {
           error.inner.forEach((err) => {
             if (!err.path) return;
             let errPath = err.path;
-            let errMsg = err.message;
 
-            if (err.path.includes("dob")) {
-              errPath = "dob";
-              errMsg = "Please check for Issues";
-            }
             if (err.path.toLowerCase().includes("consent"))
               errPath = "consentChecks";
 
-            errorCollection[errPath] = errMsg;
+            errorCollection[errPath] = err.message;
           });
 
           return { ...prev, ...errorCollection };

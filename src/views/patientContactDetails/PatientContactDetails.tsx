@@ -65,6 +65,7 @@ const PatientContactDetails = () => {
           <div className="age-select__container">
             <h3 className="input-label">Select Date of Birth</h3>
             <DatePickerContainer />
+            <ErrorMessage id="dob" />
           </div>
           <div className="age-confirm__container">
             <h3 className="input-label">Over 18 Years Old?</h3>

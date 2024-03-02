@@ -28,9 +28,7 @@ export const patientDetailsSchema = yup.object({
     .string()
     .required("Please enter a phone number")
     .matches(phoneRegExp, "Only + ( ) and numbers allowed"),
-  dobDay: yup.number().required(),
-  dobMonth: yup.number().required(),
-  dobYear: yup.number().required(),
+  dob: yup.date().required("Please enter patient's date of birth"),
   over16: yup.boolean().required("Please select one"),
 });
 

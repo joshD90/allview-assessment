@@ -1,14 +1,15 @@
 .age__container {
   display: flex;
   gap: 1rem;
+  flex-direction: column;
 }
 
 .age-select__container {
-  width: 50%;
+  width: 100%;
 }
 
 .age-confirm__container {
-  width: 50%;
+  width: 100%;
 }
 
 .age-confirm__container div div {
@@ -18,4 +19,10 @@
 }
 .age-confirm__container label {
   font-size: 0.7rem;
+}
+
+@media screen and (min-width: 640px) {
+  .age__container {
+    flex-direction: row;
+  }
 }

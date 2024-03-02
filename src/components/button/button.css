@@ -4,7 +4,7 @@ button {
   padding: 0.5rem;
   font-size: 1.2rem;
   border: none;
-  min-width: 10rem;
+  width: 100%;
   cursor: pointer;
 }
 button:hover {
@@ -16,4 +16,10 @@ button:hover {
 }
 .secondary {
   background-color: var(--lightblue);
+}
+
+@media screen and (min-width: 640px) {
+  button {
+    min-width: 10rem;
+  }
 }
